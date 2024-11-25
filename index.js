@@ -36,12 +36,18 @@ app.post("/api/persons", (request, response) => {
   const { name, number } = request.body;
 
   if (!name.trim() || !number.trim()) {
-    response.status(400).send("Name and Phone number must be provided").end();
+    return response
+      .status(400)
+      .json({ error: "Name and Phone number must be provided" });
+  }
+
+  if (persons.some(person => person.name === name)) {
+    return response.status(400).json({ error: "name must be unique" });
   }
 
   const newPerson = { id: generateId(), name: name, number: number };
 
-  persons.concat(newPerson);
+  persons = persons.concat(newPerson);
   response.status(201).send(newPerson);
 });
 
