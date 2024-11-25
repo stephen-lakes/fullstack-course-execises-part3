@@ -27,6 +27,6 @@ const persons = [
 
 app.get("/api/persons", (request, response) => {});
 
-const PORT = 3000;
+const PORT = 3001;
 app.listen(PORT);
 console.log(`Server listening on port ${PORT}`);
