@@ -31,6 +31,9 @@ app.get("/api/persons", (request, response) => {
 });
 
 const generateId = () => Math.floor(Math.random() * 1000);
+const nameExits = (name) => {
+  return persons.some((person) => person.name === name);
+};
 
 app.post("/api/persons", (request, response) => {
   const { name, number } = request.body;
@@ -41,7 +44,7 @@ app.post("/api/persons", (request, response) => {
       .json({ error: "Name and Phone number must be provided" });
   }
 
-  if (persons.some(person => person.name === name)) {
+  if (nameExits(name)) {
     return response.status(400).json({ error: "name must be unique" });
   }
 
