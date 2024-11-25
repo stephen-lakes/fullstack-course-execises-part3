@@ -25,7 +25,9 @@ const persons = [
   },
 ];
 
-app.get("/api/persons", (request, response) => {});
+app.get("/api/persons", (request, response) => {
+  response.send(JSON.stringify(persons));
+});
 
 const PORT = 3001;
 app.listen(PORT);
