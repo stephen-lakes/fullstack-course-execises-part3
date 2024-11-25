@@ -32,8 +32,14 @@ const requestLogger = (request, response, next) => {
   console.log("----");
   next();
 };
+
+const unknownEndpoint = (request, response) => {
+  response.status(400).send({ error: "unknown endpoint" });
+};
+
 app.use(express.json());
 app.use(requestLogger);
+app.use(unknownEndpoint);
 
 app.get("/api/persons", (request, response) => {
   response.send(persons);
