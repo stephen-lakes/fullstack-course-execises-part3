@@ -30,6 +30,20 @@ app.get("/api/persons", (request, response) => {
   response.send(persons);
 });
 
+app.post("/api/persons", (request, response) => {
+  const { name, number } = request.body;
+
+  if (!name.trim() || !number.trim()) {
+    response.status(400).send("Name and Phone number must be provided").end();
+  }
+
+  const randomInt = Math.floor(Math.random() * 1000);
+  const newPerson = { id: randomInt, name: name, number: number };
+
+  persons.concat(newPerson);
+  response.status(201).send(newPerson);
+});
+
 app.get("/api/persons/:id", (request, response) => {
   const id = request.params.id;
   const person = persons.find((person) => person.id === id);
