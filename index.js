@@ -29,6 +29,16 @@ app.get("/api/persons", (request, response) => {
   response.send(JSON.stringify(persons));
 });
 
+app.get("/api/persons/:id", (request, response) => {
+  const id = request.params.id;
+  const person = persons.find((person) => person.id === id);
+
+  if (!person) {
+    response.status(404).send("Person not Found");
+  }
+  response.send(JSON.stringify(person));
+});
+
 app.get("/info", (request, response) => {
   response.send(
     `The phonebook has info for ${
