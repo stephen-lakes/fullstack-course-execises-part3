@@ -24,10 +24,10 @@ const persons = [
     number: "39-23-6423122",
   },
 ];
-app.use(express.json)
+app.use(express.json());
 
 app.get("/api/persons", (request, response) => {
-  response.send(JSON.stringify(persons));
+  response.send(persons);
 });
 
 app.get("/api/persons/:id", (request, response) => {
@@ -37,7 +37,7 @@ app.get("/api/persons/:id", (request, response) => {
   if (!person) {
     response.status(404).send("Person not Found");
   }
-  response.send(JSON.stringify(person));
+  response.send(person);
 });
 
 app.get("/info", (request, response) => {
