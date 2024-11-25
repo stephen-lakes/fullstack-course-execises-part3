@@ -40,8 +40,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(express.json());
 app.use(requestLogger);
-// app.use(morgan("tiny"));
-// app.use(morgan("combined"));
+app.use(morgan("tiny"));
 app.use(
   morgan(
     ":method :url :status :res[content-length] - :response-time ms :body"
