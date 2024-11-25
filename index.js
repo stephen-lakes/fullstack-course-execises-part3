@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -39,7 +40,14 @@ const unknownEndpoint = (request, response) => {
 
 app.use(express.json());
 app.use(requestLogger);
-
+// app.use(morgan("tiny"));
+// app.use(morgan("combined"));
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :body"
+  )
+);
+morgan.token('body', (req) => JSON.stringify(req.body));
 app.get("/api/persons", (request, response) => {
   response.send(persons);
 });
