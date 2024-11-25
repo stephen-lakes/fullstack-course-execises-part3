@@ -24,6 +24,7 @@ const persons = [
     number: "39-23-6423122",
   },
 ];
+app.use(express.json)
 
 app.get("/api/persons", (request, response) => {
   response.send(JSON.stringify(persons));
