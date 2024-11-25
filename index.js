@@ -39,7 +39,6 @@ const unknownEndpoint = (request, response) => {
 
 app.use(express.json());
 app.use(requestLogger);
-app.use(unknownEndpoint);
 
 app.get("/api/persons", (request, response) => {
   response.send(persons);
@@ -92,6 +91,8 @@ app.get("/info", (request, response) => {
     } people <p> ${new Date().toString()}</p>`
   );
 });
+
+app.use(unknownEndpoint);
 
 const PORT = 3001;
 app.listen(PORT);
