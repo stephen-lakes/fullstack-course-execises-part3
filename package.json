@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui":"rm -rf dist && cd ../../FULL_STACK_COURSE/part2/phonebook && npm run build && cp -r dist ../../../EXERCISES/part3",
+    "build:ui": "rm -rf dist && cd ../../FULL_STACK_COURSE/part2/phonebook && npm run build && cp -r dist ../../../EXERCISES/part3",
     "deploy": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +24,7 @@
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "mongoose": "^8.8.3",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
