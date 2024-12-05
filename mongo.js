@@ -24,7 +24,7 @@ const Phonebook = mongoose.model("Phonebook", phonebookSchema);
 if (!name && !number) {
   Phonebook.find({}).then((result) => {
     console.log("phonebooK:");
-    result.forEach((contact) => console.log(contact));
+    result.forEach((contact) => console.log(contact.name, contact.number));
     mongoose.connection.close();
   });
 } else {
