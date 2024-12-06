@@ -57,6 +57,12 @@ app.post("/api/persons", (request, response) => {
       .json({ error: "Name and Phone number must be provided" });
   }
 
+  if (number.trim().length < 8) {
+    return response
+      .status(400)
+      .json({ error: "Phone number must be at least 8-digits" });
+  }
+
   Person.findOne({ name })
     .then((person) => {
       if (person) {
@@ -73,7 +79,7 @@ app.post("/api/persons", (request, response) => {
           .then((contact) => response.status(201).send(newPerson))
           .catch((error) => {
             console.log("ERROR====>", error.name);
-            response.status(500).json({error})
+            response.status(500).json({ error });
           });
       }
     })
