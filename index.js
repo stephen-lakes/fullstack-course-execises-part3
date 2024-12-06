@@ -72,8 +72,8 @@ app.post("/api/persons", (request, response) => {
           .save()
           .then((contact) => response.status(201).send(newPerson))
           .catch((error) => {
-            console.log("error", error);
-            response.status(500).send("Server error");
+            console.log("ERROR====>", error.name);
+            response.status(500).json({error})
           });
       }
     })
