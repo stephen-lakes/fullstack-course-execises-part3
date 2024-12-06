@@ -21,7 +21,10 @@ const personSchema = mongoose.Schema({
     minLength: 3,
     required: true,
   },
-  number: String,
+  number: {
+    type: String,
+    required: true,
+  },
 });
 
 personSchema.set("toJSON", {
