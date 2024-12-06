@@ -15,6 +15,16 @@ mongoose
     console.log("error connecting to MongoDB:", error.message);
   });
 
+const validateNumber = (number) => {
+  // check for correct format
+  const parts = number.split("-");
+  if (parts.length !== 2) return false;
+
+  if (!/^\d{2,3}$/.test(parts[0]) || !/^\d+$/.test(parts[1])) return false;
+
+  return true;
+};
+
 const personSchema = mongoose.Schema({
   name: {
     type: String,
@@ -23,7 +33,12 @@ const personSchema = mongoose.Schema({
   },
   number: {
     type: String,
-    required: true,
+    validate: {
+      validator: validateNumber,
+      message: (props) =>
+        `${props.value} is not a valid phone number! It should be in the format XX-XXXXXXX or XXX-XXXXXXXX.`,
+    },
+    required: [true, "User phone number required"],
   },
 });
 
