@@ -1,17 +1,18 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+/* eslint-disable no-unused-vars */
+require('dotenv').config();
+const mongoose = require('mongoose');
 
 if (process.argv.length < 3) {
-  console.log("give password as arguement");
+  console.log('give password as arguement');
   process.exit(1);
 }
 
-const password = process.argv[2];
+// const password = process.argv[2];
 const name = process.argv[3];
 const number = process.argv[4];
 
 const url = process.env.MONGODB_URI;
-mongoose.set("strictQuery", false);
+mongoose.set('strictQuery', false);
 
 mongoose.connect(url);
 
@@ -20,11 +21,11 @@ const phonebookSchema = mongoose.Schema({
   number: String,
 });
 
-const Phonebook = mongoose.model("Phonebook", phonebookSchema);
+const Phonebook = mongoose.model('Phonebook', phonebookSchema);
 
 if (!name && !number) {
   Phonebook.find({}).then((result) => {
-    console.log("phonebooK:");
+    console.log('phonebooK:');
     result.forEach((contact) => console.log(contact.name, contact.number));
     mongoose.connection.close();
   });
