@@ -23,7 +23,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
-  } else if (error.name === "ValidationError") {
+  }
+  if (error.name === "ValidationError") {
     return response.status(400).send({ error: error.message });
   }
 
@@ -45,7 +46,7 @@ app.get("/api/persons", (request, response) => {
 
 const generateId = () => Math.floor(Math.random() * 1000);
 const nameExists = (name) => {
-  return Person.findOne({ name: name });
+  // return Person.findOne({ name: name });
 };
 
 app.post("/api/persons", (request, response) => {
@@ -69,25 +70,24 @@ app.post("/api/persons", (request, response) => {
         person.number = number;
         person.save();
         return response.status(200).json(person);
-      } else {
-        const newPerson = new Person({
-          name: name,
-          number: number,
-        });
-        newPerson
-          .save()
-          .then((contact) => response.status(201).send(newPerson))
-          .catch((error) => {
-            console.log("ERROR====>", error.name);
-            response.status(500).json({ error });
-          });
       }
+      const newPerson = new Person({
+        name,
+        number,
+      });
+      newPerson
+        .save()
+        .then((contact) => response.status(201).send(newPerson))
+        .catch((error) => {
+          console.log("ERROR====>", error.name);
+          response.status(500).json({ error });
+        });
     })
     .catch((error) => console.error("Error Finding person by name", error));
 });
 
 app.get("/api/persons/:id", (request, response, next) => {
-  const id = request.params.id;
+  const { id } = request.params;
   Person.findById(id)
     .then((person) => {
       if (person) response.json(person);
@@ -111,7 +111,7 @@ app.put("/api/persons/:id", (request, response, next) => {
 });
 
 app.delete("/api/persons/:id", (request, response, next) => {
-  const id = request.params.id;
+  const { id } = request.params;
   Person.findByIdAndDelete(id)
     .then((result) => {
       response.status(204).end();
