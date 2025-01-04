@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "build:ui": "rm -rf dist && cd ../../FULL_STACK_COURSE/part2/phonebook && npm run build && cp -r dist ../../../EXERCISES/part3",
     "deploy": "npm run build:ui && git add . && git commit -m uibuild && git push",
-    "test": "jest --verbose",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "NODE_ENV=test jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "@eslint/js": "^8.57.1",
     "@flydotio/dockerfile": "^0.5.9",
     "@stylistic/eslint-plugin-js": "^1.8.1",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.31.0",
