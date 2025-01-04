@@ -1,4 +1,4 @@
-const globals = require('globals');
+const globals = require("globals");
 const stylisticJs = require("@stylistic/eslint-plugin-js");
 const js = require("@eslint/js");
 
@@ -7,6 +7,7 @@ module.exports = {
     browser: true,
     commonjs: true,
     es2021: true,
+    jest: true,
   },
   _overrides: [
     {
