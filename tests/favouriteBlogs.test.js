@@ -1,9 +1,9 @@
 const listHelper = require("../utils/list_helper");
 
-describe("favorite blog", () => {
+describe("most blogs", () => {
   test("of empty list", () => {
     const blogs = [];
-    const result = listHelper.favoriteBlog(blogs);
+    const result = listHelper.mostBlogs(blogs);
 
     expect(result).toBe(0);
   });
@@ -60,12 +60,8 @@ describe("favorite blog", () => {
       },
     ];
 
-    const result = listHelper.favoriteBlog(blogs);
+    const result = listHelper.mostBlogs(blogs);
 
-    expect(result).toEqual({
-      title: "Canonical string reduction",
-      author: "Edsger W. Dijkstra",
-      likes: 12,
-    });
+    expect(result).toEqual({ author: "Robert C. Martin", blogs: 3 });
   });
 });
